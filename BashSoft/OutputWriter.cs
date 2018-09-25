@@ -16,7 +16,7 @@ namespace BashSoft
             Console.WriteLine(message);
         }
 
-        public static void WriteEmptyLine()
+        public static void WriteEmptyLine() 
         {
             Console.WriteLine();
         }

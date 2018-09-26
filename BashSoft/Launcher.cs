@@ -7,7 +7,8 @@ namespace BashSoft
     {
         static void Main(string[] args)
         {
-            var testDirectory = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft";
+            OutputWriter.WriteMessage("Specify directory path: ");
+            var testDirectory = Console.ReadLine();
             IOManager.TraverceDirectory(testDirectory);
         }
     }

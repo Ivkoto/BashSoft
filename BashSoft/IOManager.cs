@@ -27,5 +27,25 @@ namespace BashSoft
                 }
             }
         }
+
+        public static void countDirectory(string path)
+        {
+            OutputWriter.WriteEmptyLine();
+            var subFolder = new Queue<string>();
+            subFolder.Enqueue(path);
+            int counter = 0;
+
+            while (subFolder.Count != 0)
+            {
+                string currentPath = subFolder.Dequeue();
+                foreach (var dir in Directory.GetDirectories(currentPath))
+                {
+                    subFolder.Enqueue(dir);
+                    counter++;
+                }
+            }
+
+            OutputWriter.WriteMessageOnNewLine($"Total directory count: {counter}");
+        }
     }
 }

@@ -9,8 +9,8 @@ namespace BashSoft
         {
             OutputWriter.WriteMessage("Specify directory path: ");
             var testDirectory = Console.ReadLine();
-            //IOManager.TraverceDirectory(testDirectory);
-            IOManager.countDirectory(testDirectory);
+            IOManager.TraverceDirectory(testDirectory);
+            //IOManager.countDirectory(testDirectory);
         }
     }
 }

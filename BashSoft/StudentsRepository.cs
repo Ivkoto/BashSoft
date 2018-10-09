@@ -40,8 +40,8 @@ namespace BashSoft
                 if (!studentsByCourse.ContainsKey(course))
                 {
                     studentsByCourse.Add(course, new Dictionary<string, List<int>>());
-
                 }
+
                 if (!studentsByCourse[course].ContainsKey(student))
                 {
                     studentsByCourse[course].Add(student, new List<int>());
@@ -54,6 +54,41 @@ namespace BashSoft
 
             isDataInitialized = true;
             OutputWriter.WriteMessageOnNewLine("Data read!");
+        }
+
+        private static bool IsQueryForCoursePossible(string courseName)
+        {
+            if (isDataInitialized)
+            {
+                if (studentsByCourse.ContainsKey(courseName))
+                {
+                    return true;
+                }
+                else
+                {
+                    OutputWriter.DisplayExeptions(ExceptionMessages.InexistingCourseInDataBase);
+                }
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.DataNotInitializedExceptionMessage);
+            }
+
+            return false;
+        }
+
+        private static bool IsQueryForStudentPossible(string courseName, string studentUserName)
+        {
+            if (IsQueryForCoursePossible(courseName) && studentsByCourse[courseName].ContainsKey(studentUserName))
+            {
+                return true;
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InexistingStudentInDataBase);
+            }
+
+            return false;
         }
     }
 }

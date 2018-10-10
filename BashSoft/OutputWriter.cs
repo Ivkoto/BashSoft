@@ -28,5 +28,12 @@ namespace BashSoft
             Console.WriteLine(message);
             Console.ForegroundColor = currentColor;
         }
+
+
+        //receive KeyValuePair<user name, scoreon tasks>
+        public static void PrintStudent(KeyValuePair<string, List<int>> students)
+        {
+            OutputWriter.WriteMessageOnNewLine(string.Format($"{students.Key} - {string.Join(", ", students.Value)}"));
+        }
     }
 }

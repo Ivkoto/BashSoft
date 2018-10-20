@@ -31,9 +31,35 @@ namespace SimpleJudje
             return directoryPath + @"\Mismatches.txt";
         }
 
-        private static string[] GetLineWithPossibleMismatche(string[] actialOutputLines, string[] expectedOutputLines, out bool hasMismatches)
+        private static string[] GetLineWithPossibleMismatche(string[] actualOutputLines, string[] expectedOutputLines, out bool hasMismatch)
         {
+            hasMismatch = false;
+            string output = string.Empty;
 
+            string[] mismatches = new string[actualOutputLines.Length];
+            OutputWriter.WriteMessageOnNewLine("Comparng files...");
+
+            for (int index = 0; index < actualOutputLines.Length; index++)
+            {
+                string actualLine = actualOutputLines[index];
+                string expectedLine = expectedOutputLines[index];
+
+                if (!actualLine.Equals(expectedLine))
+                {
+                    output = string.Format($"Mismatch at line {0} -- expected: \"{1}\", actual: \"{2}\"", index, expectedLine, actualLine);
+                    output += Environment.NewLine;
+                    hasMismatch = true;
+                }
+                else
+                {
+                    output = actualLine;
+                    output += Environment.NewLine;
+                }
+
+                mismatches[index] = output;
+            }
+
+            return mismatches;
         }
 
         private static void PrintOutput(string[] mismatches, bool hasMismatch, string mismatchPath)

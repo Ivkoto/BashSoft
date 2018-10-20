@@ -42,8 +42,8 @@ namespace BashSoft
                 string expectedLine = expectedOutputLines[index];
 
                 if (!actualLine.Equals(expectedLine))
-                {
-                    output = string.Format($"Mismatch at line {0} -- expected: \"{1}\", actual: \"{2}\"", index, expectedLine, actualLine);
+                {                    
+                    output = string.Format($"Mismatch at line {index} -- expected: {expectedLine}, actual: {actualLine}");
                     output += Environment.NewLine;
                     hasMismatch = true;
                 }

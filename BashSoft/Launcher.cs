@@ -10,11 +10,12 @@
             //IOManager.TraverceDirectory(testDirectory);
             //IOManager.countDirectory(testDirectory);
 
-            StudentsRepository.InitializeData();
-            StudentsRepository.GetAllStudentsFromCourse("Unity");
+            //StudentsRepository.InitializeData();
+            //StudentsRepository.GetAllStudentsFromCourse("Unity");
 
-            //TODO
-            Tester.CompareContent("");
+            string expectedOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test1.txt";
+            string userOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test3.txt";
+            Tester.CompareContent(userOutput, expectedOutput);
         }
     }
 }

@@ -1,12 +1,10 @@
 ﻿using BashSoft;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace SimpleJudje
 {
-    class Tester
+    public static class Tester
     {
         public static void CompareContent(string userOutputPath, string expectedOutputPath)
         {
@@ -64,7 +62,19 @@ namespace SimpleJudje
 
         private static void PrintOutput(string[] mismatches, bool hasMismatch, string mismatchPath)
         {
+            if (hasMismatch)
+            {
+                foreach (var line in mismatches)
+                {
+                    OutputWriter.WriteMessageOnNewLine(line);
+                }
 
+                File.WriteAllLines(mismatchPath, mismatches);
+            }
+            else
+            {
+                OutputWriter.WriteMessageOnNewLine("Files are identical.There are no mismatches.");
+            }
         }
     }
 }

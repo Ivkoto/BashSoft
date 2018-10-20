@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace BashSoft
 {
@@ -19,7 +17,7 @@ namespace BashSoft
                 string currentPath = subFolders.Dequeue();
                 int identation = currentPath.Split('\\').Length - initialIdentation;
 
-                OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string ('-', identation), currentPath));
+                OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string('-', identation), currentPath));
 
                 foreach (string directoryPath in Directory.GetDirectories(currentPath))
                 {

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BashSoft
 {
     public static class OutputWriter
     {
-        public static void WriteMessage (string message)
+        public static void WriteMessage(string message)
         {
             Console.Write(message);
         }
@@ -16,7 +15,7 @@ namespace BashSoft
             Console.WriteLine(message);
         }
 
-        public static void WriteEmptyLine() 
+        public static void WriteEmptyLine()
         {
             Console.WriteLine();
         }
@@ -28,7 +27,6 @@ namespace BashSoft
             Console.WriteLine(message);
             Console.ForegroundColor = currentColor;
         }
-
 
         //receive KeyValuePair<user name, scoreon tasks>
         public static void PrintStudent(KeyValuePair<string, List<int>> students)

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BashSoft
 {
@@ -8,9 +7,9 @@ namespace BashSoft
     public static class StudentsRepository
     {
         public static bool isDataInitialized = false;
+
         //Dictionary<course_name, Dictionary<user_name, scoreOnTasks>>
         private static Dictionary<string, Dictionary<string, List<int>>> studentsByCourse;
-
 
         public static void InitializeData()
         {

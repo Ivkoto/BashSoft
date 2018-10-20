@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
-    class Launcher
+    internal class Launcher
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //this is test code for visualising and counting all subfolders in given folder
             //OutputWriter.WriteMessage("Specify directory path: ");
@@ -15,6 +12,9 @@ namespace BashSoft
 
             StudentsRepository.InitializeData();
             StudentsRepository.GetAllStudentsFromCourse("Unity");
+
+            //TODO
+            Tester.CompareContent("");
         }
     }
 }

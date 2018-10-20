@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BashSoft", "BashSoft\BashSoft.csproj", "{6A26E787-0C82-4942-AC99-B433251106FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleJudje", "SimpleJudje\SimpleJudje.csproj", "{74CC6A66-8A80-4174-8F44-EF270C698A10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleJudje", "SimpleJudje\SimpleJudje.csproj", "{74CC6A66-8A80-4174-8F44-EF270C698A10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

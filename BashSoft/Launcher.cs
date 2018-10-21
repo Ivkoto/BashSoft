@@ -1,4 +1,6 @@
-﻿namespace BashSoft
+﻿using BashSoft.DataStructures;
+
+namespace BashSoft
 {
     internal class Launcher
     {
@@ -13,9 +15,11 @@
             //StudentsRepository.InitializeData();
             //StudentsRepository.GetAllStudentsFromCourse("Unity");
 
-            string expectedOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test1.txt";
-            string userOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test3.txt";
-            Tester.CompareContent(userOutput, expectedOutput);
+            //string expectedOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test1.txt";
+            //string userOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test3.txt";
+            //Tester.CompareContent(userOutput, expectedOutput);
+
+            IOManager.CreateDirectoryInCurrentFolder("Pesho");
         }
     }
 }

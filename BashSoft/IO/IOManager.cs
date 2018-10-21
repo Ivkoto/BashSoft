@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using BashSoft.DataStructures;
 
 namespace BashSoft
 {
@@ -26,6 +27,7 @@ namespace BashSoft
             }
         }
 
+        //this is my test class that is not part of the project
         public static void countDirectory(string path)
         {
             OutputWriter.WriteEmptyLine();
@@ -44,6 +46,12 @@ namespace BashSoft
             }
 
             OutputWriter.WriteMessageOnNewLine($"Total directory count: {counter}");
+        }
+
+        public static void CreateDirectoryInCurrentFolder(string folderName)
+        {
+            string path = SessionData.currentPath + "\\" + folderName;
+            Directory.CreateDirectory(path);
         }
     }
 }

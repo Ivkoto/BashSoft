@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using BashSoft.DataStructures;
+using System.Collections.Generic;
 using System.IO;
-using BashSoft.DataStructures;
 
 namespace BashSoft
 {
     public static class IOManager
     {
-        public static void TraverceDirectory(string path)
+        public static void TraverceDirectory()
         {
             OutputWriter.WriteEmptyLine();
-            int initialIdentation = path.Split('\\').Length;
+            int initialIdentation = SessionData.currentPath.Split('\\').Length;
             var subFolders = new Queue<string>();
-            subFolders.Enqueue(path);
+            subFolders.Enqueue(SessionData.currentPath);
 
             while (subFolders.Count != 0)
             {

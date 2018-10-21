@@ -6,20 +6,25 @@ namespace BashSoft
     {
         private static void Main(string[] args)
         {
-            //this is test code for visualising and counting all subfolders in given folder
+            //visualising all subfolders in given folder
+            IOManager.TraverceDirectory();
+
+            //this part count all subdirectory in given directory
             //OutputWriter.WriteMessage("Specify directory path: ");
             //var testDirectory = Console.ReadLine();
-            //IOManager.TraverceDirectory(testDirectory);
             //IOManager.countDirectory(testDirectory);
 
+            //initialize student data
             //StudentsRepository.InitializeData();
             //StudentsRepository.GetAllStudentsFromCourse("Unity");
 
+            //compare text files
             //string expectedOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test1.txt";
             //string userOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test3.txt";
             //Tester.CompareContent(userOutput, expectedOutput);
 
-            IOManager.CreateDirectoryInCurrentFolder("Pesho");
+            //create subdirectory in current directory
+            //IOManager.CreateDirectoryInCurrentFolder("Pesho");
         }
     }
 }

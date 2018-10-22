@@ -6,7 +6,7 @@ namespace BashSoft
 {
     public static class IOManager
     {
-        public static void TraverceDirectory(int depth)
+        public static void TraverseDirectory(int depth)
         {
             OutputWriter.WriteEmptyLine();
             int initialIdentation = SessionData.currentPath.Split('\\').Length;
@@ -31,6 +31,11 @@ namespace BashSoft
                     var indexOfLastSplash = file.LastIndexOf('\\');
                     var fileName = file.Substring(indexOfLastSplash);
                     OutputWriter.WriteMessageOnNewLine(new string('-', indexOfLastSplash) + fileName);
+                }
+
+                if (depth - identation < 0)
+                {
+                    break;
                 }
             }
         }

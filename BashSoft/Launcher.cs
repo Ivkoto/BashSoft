@@ -7,7 +7,8 @@ namespace BashSoft
         private static void Main(string[] args)
         {
             //visualising all subfolders in given folder
-            IOManager.TraverceDirectory(10);
+            int testDept = 10;
+            IOManager.TraverseDirectory(testDept);
 
             //this part count all subdirectory in given directory
             //OutputWriter.WriteMessage("Specify directory path: ");

@@ -6,7 +6,7 @@ namespace BashSoft
 {
     public static class IOManager
     {
-        public static void TraverceDirectory()
+        public static void TraverceDirectory(int depth)
         {
             OutputWriter.WriteEmptyLine();
             int initialIdentation = SessionData.currentPath.Split('\\').Length;
@@ -23,6 +23,14 @@ namespace BashSoft
                 foreach (string directoryPath in Directory.GetDirectories(currentPath))
                 {
                     subFolders.Enqueue(directoryPath);
+                }
+
+                //get and write file names for current directory
+                foreach (var file in Directory.GetFiles(currentPath))
+                {
+                    var indexOfLastSplash = file.LastIndexOf('\\');
+                    var fileName = file.Substring(indexOfLastSplash);
+                    OutputWriter.WriteMessageOnNewLine(new string('-', indexOfLastSplash) + fileName);
                 }
             }
         }

@@ -9,9 +9,9 @@ namespace BashSoft
         public static void TraverseDirectory(int depth)
         {
             OutputWriter.WriteEmptyLine();
-            int initialIdentation = SessionData.currentPath.Split('\\').Length;
+            int initialIdentation = SessionData.CurrentPath.Split('\\').Length;
             var subFolders = new Queue<string>();
-            subFolders.Enqueue(SessionData.currentPath);
+            subFolders.Enqueue(SessionData.CurrentPath);
 
             while (subFolders.Count != 0)
             {
@@ -63,8 +63,36 @@ namespace BashSoft
 
         public static void CreateDirectoryInCurrentFolder(string folderName)
         {
-            string path = SessionData.currentPath + "\\" + folderName;
+            string path = SessionData.CurrentPath + "\\" + folderName;
             Directory.CreateDirectory(path);
+        }
+
+        public static void ChangeCurrentDirectoryRelative(string relativePath)
+        {
+            if (relativePath == "..")
+            {
+                string currentPath = SessionData.CurrentPath;
+                int indexofLastSlash = currentPath.LastIndexOf('\\');
+                string newPath = currentPath.Substring(0, indexofLastSlash);
+                SessionData.CurrentPath = newPath;
+            }
+            else
+            {
+                string currentPath = SessionData.CurrentPath;
+                currentPath += "\\" + relativePath;
+                ChangeCurrentDirectoryAbsolute(currentPath);
+            }
+        }
+
+        public static void ChangeCurrentDirectoryAbsolute(string absolutePath)
+        {
+            if (!Directory.Exists(absolutePath))
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidPath);
+                return;
+            }
+
+            SessionData.CurrentPath = absolutePath;
         }
     }
 }

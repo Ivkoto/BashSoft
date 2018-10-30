@@ -20,17 +20,24 @@ namespace BashSoft
 
                 OutputWriter.WriteMessageOnNewLine(string.Format("{0}{1}", new string('-', identation), currentPath));
 
-                foreach (string directoryPath in Directory.GetDirectories(currentPath))
+                try
                 {
-                    subFolders.Enqueue(directoryPath);
-                }
+                    foreach (string directoryPath in Directory.GetDirectories(currentPath))
+                    {
+                        subFolders.Enqueue(directoryPath);
+                    }
 
-                //get and write file names for current directory
-                foreach (var file in Directory.GetFiles(currentPath))
+                    //get and write file names for current directory
+                    foreach (var file in Directory.GetFiles(currentPath))
+                    {
+                        var indexOfLastSplash = file.LastIndexOf('\\');
+                        var fileName = file.Substring(indexOfLastSplash);
+                        OutputWriter.WriteMessageOnNewLine(new string('-', indexOfLastSplash) + fileName);
+                    }
+                }
+                catch (System.UnauthorizedAccessException)
                 {
-                    var indexOfLastSplash = file.LastIndexOf('\\');
-                    var fileName = file.Substring(indexOfLastSplash);
-                    OutputWriter.WriteMessageOnNewLine(new string('-', indexOfLastSplash) + fileName);
+                    OutputWriter.DisplayExeptions(ExceptionMessages.UnauthorizedAccessException);
                 }
 
                 if (depth - identation < 0)

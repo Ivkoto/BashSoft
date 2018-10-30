@@ -7,8 +7,8 @@ namespace BashSoft
         private static void Main(string[] args)
         {
             //visualising all subfolders in given folder
-            int testDept = 10;
-            IOManager.TraverseDirectory(testDept);
+            //int testDept = 10;
+            //IOManager.TraverseDirectory(testDept);
 
             //this part count all subdirectory in given directory
             //OutputWriter.WriteMessage("Specify directory path: ");
@@ -26,6 +26,10 @@ namespace BashSoft
 
             //create subdirectory in current directory
             //IOManager.CreateDirectoryInCurrentFolder("Pesho");
+
+            //test traverse directory with curent path
+            IOManager.ChangeCurrentDirectoryAbsolute(@"C:\Windows");
+            IOManager.TraverseDirectory(1);
         }
     }
 }

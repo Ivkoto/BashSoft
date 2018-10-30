@@ -20,16 +20,16 @@ namespace BashSoft
             //StudentsRepository.GetAllStudentsFromCourse("Unity");
 
             //compare text files
-            //string expectedOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test1.txt";
-            //string userOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test3.txt";
-            //Tester.CompareContent(userOutput, expectedOutput);
+            string expectedOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test2.txt";
+            string userOutput = @"C:\Users\ikost\Documents\Visual Studio 2017\Projects\BashSoft\BashSoft\SimpleJudge\testFiles\test3.txt";
+            Tester.CompareContent(userOutput, expectedOutput);
 
             //create subdirectory in current directory
             //IOManager.CreateDirectoryInCurrentFolder("Pesho");
 
             //test traverse directory with curent path
-            IOManager.ChangeCurrentDirectoryAbsolute(@"C:\Windows");
-            IOManager.TraverseDirectory(1);
+            //IOManager.ChangeCurrentDirectoryAbsolute(@"C:\Windows");
+            //IOManager.TraverseDirectory(1);
         }
     }
 }

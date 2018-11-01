@@ -30,17 +30,7 @@
             //IOManager.TraverseDirectory(1);
 
             //going one folder up the Hierarchy
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
-            IOManager.ChangeCurrentDirectoryRelative("..");
+            //IOManager.ChangeCurrentDirectoryRelative("..");
         }
     }
 }

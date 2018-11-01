@@ -33,16 +33,26 @@ namespace BashSoft
             hasMismatch = false;
             string output = string.Empty;
 
-            string[] mismatches = new string[actualOutputLines.Length];
             OutputWriter.WriteMessageOnNewLine("Comparng files...");
 
-            for (int index = 0; index < actualOutputLines.Length; index++)
+            int minOutputLines = actualOutputLines.Length;
+
+            if (actualOutputLines.Length != expectedOutputLines.Length)
+            {
+                hasMismatch = true;
+                minOutputLines = Math.Min(actualOutputLines.Length, expectedOutputLines.Length);
+                OutputWriter.DisplayExeptions(ExceptionMessages.ComparisonOfFilesWithDifferentSizes);
+            }
+
+            string[] mismatches = new string[minOutputLines];
+
+            for (int index = 0; index < minOutputLines; index++)
             {
                 string actualLine = actualOutputLines[index];
                 string expectedLine = expectedOutputLines[index];
 
                 if (!actualLine.Equals(expectedLine))
-                {                    
+                {
                     output = string.Format($"Mismatch at line {index} -- expected: {expectedLine}, actual: {actualLine}");
                     output += Environment.NewLine;
                     hasMismatch = true;

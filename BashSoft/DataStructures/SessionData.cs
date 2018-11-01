@@ -7,7 +7,5 @@ namespace BashSoft.DataStructures
         private static string currentPath = Directory.GetCurrentDirectory();
 
         public static string CurrentPath { get => currentPath; set => currentPath = value; }
-
-
     }
 }

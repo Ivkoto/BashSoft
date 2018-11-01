@@ -1,6 +1,4 @@
-﻿using BashSoft.DataStructures;
-
-namespace BashSoft
+﻿namespace BashSoft
 {
     internal class Launcher
     {

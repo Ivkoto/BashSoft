@@ -84,8 +84,15 @@ namespace BashSoft
                 {
                     OutputWriter.WriteMessageOnNewLine(line);
                 }
-
-                File.WriteAllLines(mismatchPath, mismatches);
+                try
+                {
+                    File.WriteAllLines(mismatchPath, mismatches);
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    OutputWriter.DisplayExeptions(ExceptionMessages.InvalidPath);
+                }
+                
             }
             else
             {

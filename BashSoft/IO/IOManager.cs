@@ -87,10 +87,18 @@ namespace BashSoft
         {
             if (relativePath == "..")
             {
-                string currentPath = SessionData.CurrentPath;
-                int indexofLastSlash = currentPath.LastIndexOf('\\');
-                string newPath = currentPath.Substring(0, indexofLastSlash);
-                SessionData.CurrentPath = newPath;
+                try
+                {
+                    string currentPath = SessionData.CurrentPath;
+                    int indexofLastSlash = currentPath.LastIndexOf('\\');
+                    string newPath = currentPath.Substring(0, indexofLastSlash);
+                    SessionData.CurrentPath = newPath;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    OutputWriter.DisplayExeptions(ExceptionMessages.UnableToGoHigherInPartitionHierarchy);
+                }
+                
             }
             else
             {

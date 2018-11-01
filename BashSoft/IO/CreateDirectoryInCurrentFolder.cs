@@ -1,6 +1,7 @@
 ﻿namespace BashSoft
 {
-    internal class CreateDirectoryInCurrentFolder
+    public class CreateDirectoryInCurrentFolder
     {
+
     }
 }

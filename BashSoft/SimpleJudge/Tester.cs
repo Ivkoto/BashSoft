@@ -8,17 +8,24 @@ namespace BashSoft
         public static void CompareContent(string userOutputPath, string expectedOutputPath)
         {
             OutputWriter.WriteMessageOnNewLine("Reading files...");
+            try
+            {
+                string mismatchPath = GetMismatchPath(expectedOutputPath);
 
-            string mismatchPath = GetMismatchPath(expectedOutputPath);
+                string[] actualOutputLines = File.ReadAllLines(userOutputPath);
+                string[] expectedOutputLines = File.ReadAllLines(expectedOutputPath);
 
-            string[] actualOutputLines = File.ReadAllLines(userOutputPath);
-            string[] expectedOutputLines = File.ReadAllLines(expectedOutputPath);
+                bool hasMismatches;
+                string[] mismatches = GetLineWithPossibleMismatche(actualOutputLines, expectedOutputLines, out hasMismatches);
 
-            bool hasMismatches;
-            string[] mismatches = GetLineWithPossibleMismatche(actualOutputLines, expectedOutputLines, out hasMismatches);
-
-            PrintOutput(mismatches, hasMismatches, mismatchPath);
-            OutputWriter.WriteMessageOnNewLine("Files read!");
+                PrintOutput(mismatches, hasMismatches, mismatchPath);
+                OutputWriter.WriteMessageOnNewLine("Files read!");
+            }
+            catch (FileNotFoundException)
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidPath);
+            }
+            
         }
 
         private static string GetMismatchPath(string expectedOutputPath)

@@ -1,4 +1,5 @@
 ﻿using BashSoft.DataStructures;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -71,7 +72,15 @@ namespace BashSoft
         public static void CreateDirectoryInCurrentFolder(string folderName)
         {
             string path = SessionData.CurrentPath + "\\" + folderName;
-            Directory.CreateDirectory(path);
+
+            try
+            {
+                Directory.CreateDirectory(path);
+            }
+            catch (ArgumentException)
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.ForbiddenSymbolsContainedInName);
+            }
         }
 
         public static void ChangeCurrentDirectoryRelative(string relativePath)

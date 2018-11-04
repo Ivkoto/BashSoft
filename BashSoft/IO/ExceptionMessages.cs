@@ -24,5 +24,7 @@
         {
             return $"The command '{input}' is invalid";
         }
+
+        public const string UnableToParseNumber = "The sequence you've written is not a valid number";
     }
 }

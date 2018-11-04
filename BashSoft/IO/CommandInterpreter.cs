@@ -72,73 +72,99 @@ namespace BashSoft.IO
 
         private static void TryGetHelp(string input, string[] data)
         {
-            if (data.Length == )
+            if (data.Length == 1)
             {
-                //TODO
+                OutputWriter.WriteMessageOnNewLine($"{new string('_', 100)}");
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "make directory - mkdir: path "));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "traverse directory - ls: depth "));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "comparing files - cmp: path1 path2"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "change directory - changeDirREl:relative path"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "change directory - changeDir:absolute path"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "read students data base - readDb: path"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "display data entities - display students/courses ascending/descending"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "filter {courseName} excelent/average/poor  take 2/5/all students - filterExcelent (the output is written on the console)"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "order increasing students - order {courseName} ascending/descending take 20/10/all (the output is written on the console)"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "download file - download: path of file (saved in current directory)"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "download file asinchronously - downloadAsynch: path of file (save in the current directory)"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -98}|", "get help – help"));
+                OutputWriter.WriteMessageOnNewLine($"{new string('_', 100)}");
+                OutputWriter.WriteEmptyLine();
             }
             else
             {
-                //DisplayInavlidCommandMessage(input)
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
             }
         }
 
         private static void TryReadDataBaseFromFile(string input, string[] data)
         {
-            if (data.Length == )
+            if (data.Length == 2)
             {
-                //TODO
+                string fileName = data[1];
+                StudentsRepository.InitializeData(fileName);
             }
             else
             {
-                //DisplayInavlidCommandMessage(input)
-            }
-        }
-
-        private static void TryChangePathRelatively(string input, string[] data)
-        {
-            if (data.Length == )
-            {
-                //TODO
-            }
-            else
-            {
-                //DisplayInavlidCommandMessage(input)
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
             }
         }
 
         private static void TryChangePathAbsolute(string input, string[] data)
         {
-            if (data.Length == )
+            if (data.Length == 2)
             {
-                //TODO
+                string absPath = data[1];
+
+                IOManager.ChangeCurrentDirectoryAbsolute(absPath);
             }
             else
             {
-                //DisplayInavlidCommandMessage(input)
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
+            }
+        }
+
+        private static void TryChangePathRelatively(string input, string[] data)
+        {
+            if (data.Length == 2)
+            {
+                string relPath = data[1];
+                IOManager.ChangeCurrentDirectoryRelative(relPath);
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
             }
         }
 
         private static void TryCompareFiles(string input, string[] data)
         {
-            if (data.Length == )
+            if (data.Length == 3)
             {
-                //TODO
+                string firstPath = data[1];
+                string secondPath = data[2];
+
+                Tester.CompareContent(firstPath, secondPath);
             }
             else
             {
-                //DisplayInavlidCommandMessage(input)
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
             }
         }
 
         private static void TryTraverseFolders(string input, string[] data)
         {
-            if (data.Length == )
+            if (data.Length == 2)
             {
-                //TODO
+                int depth;
+                bool hasParsed = int.TryParse(data[1], out depth);
+                if (hasParsed)
+                {
+                    IOManager.TraverseDirectory(depth);
+                }
             }
             else
             {
-                //DisplayInavlidCommandMessage(input)
+                OutputWriter.DisplayExeptions(ExceptionMessages.UnableToParseNumber);
             }
         }
 
@@ -146,7 +172,8 @@ namespace BashSoft.IO
         {
             if (data.Length == 2)
             {
-                
+                string folerName = data[1];
+                IOManager.CreateDirectoryInCurrentFolder(folerName);
             }
             else
             {

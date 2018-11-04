@@ -13,7 +13,7 @@ namespace BashSoft.IO
 
             while (input != endCommand)
             {
-                //interpret command
+                CommandInterpreter.InterpredCommand(input);
                 OutputWriter.WriteMessage($"{SessionData.CurrentPath}>");
                 input = Console.ReadLine().Trim();
             }

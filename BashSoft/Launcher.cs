@@ -1,4 +1,6 @@
-﻿namespace BashSoft
+﻿using BashSoft.IO;
+
+namespace BashSoft
 {
     internal class Launcher
     {
@@ -31,6 +33,8 @@
 
             //going one folder up the Hierarchy
             //IOManager.ChangeCurrentDirectoryRelative("..");
+
+            InputReader.StartReadingCommands();
         }
     }
 }

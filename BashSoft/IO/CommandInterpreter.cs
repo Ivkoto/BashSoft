@@ -207,14 +207,21 @@ namespace BashSoft.IO
 
         private static void TryOpenFile(string input, string[] data)
         {
-            if (data.Length == 2)
+            try
             {
-                string fileName = data[1];
-                Process.Start(SessionData.CurrentPath + "\\" + fileName);
+                if (data.Length == 2)
+                {
+                    string fileName = data[1];
+                    Process.Start(SessionData.CurrentPath + "\\" + fileName);
+                }
+                else
+                {
+                    OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
+                OutputWriter.DisplayExeptions(ex.Message);
             }
         }
     }

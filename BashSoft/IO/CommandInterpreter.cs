@@ -1,4 +1,5 @@
 ﻿using BashSoft.DataStructures;
+using System;
 using System.Diagnostics;
 
 namespace BashSoft.IO
@@ -44,6 +45,10 @@ namespace BashSoft.IO
                     TryGetHelp(input, data);
                     break;
 
+                case "show":
+                    TryShowWantedData(input, data);
+                    break;
+
                 case "filter":
                     //TODO
                     break;
@@ -70,6 +75,25 @@ namespace BashSoft.IO
             }
         }
 
+        private static void TryShowWantedData(string input, string[] data)
+        {
+            if (data.Length == 2)
+            {
+                string courseName = data[1];
+                StudentsRepository.GetAllStudentsFromCourse(courseName);
+            }
+            else if (data.Length == 3)
+            {
+                string courseName = data[1];
+                string studentName = data[2];
+                StudentsRepository.GetStudentScoresFromCourse(courseName, studentName);
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
+            }
+        }
+
         private static void TryGetHelp(string input, string[] data)
         {
             if (data.Length == 1)
@@ -78,8 +102,8 @@ namespace BashSoft.IO
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "make directory - mkdir: path "));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "traverse directory - ls: depth "));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "comparing files - cmp: path1 path2"));
-                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - changeDirREl:relative path"));
-                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - changeDir:absolute path"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - cdRel:relative path"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - cdAbs:absolute path"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "read students data base - readDb: path"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "display data entities - display students/courses ascending/descending"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "filter {courseName} excelent/average/poor  take 2/5/all students - filterExcelent (the output is written on the console)"));

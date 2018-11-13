@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BashSoft.Repositories
 {
@@ -6,7 +7,43 @@ namespace BashSoft.Repositories
     {
         public static void FilterAndTake(Dictionary<string, List<int>> wantedData, string wantedFilter, int studentsToTake)
         {
-            
+            if (wantedFilter == "excellent")
+            {
+                FilterAndTake(wantedData, ExcellentFilter, studentsToTake);
+            }
+            else if (wantedFilter == "everage")
+            {
+                FilterAndTake(wantedData, AverageFilter, studentsToTake);
+            }
+            else if (wantedFilter == "poor")
+            {
+                FilterAndTake(wantedData, PoorFilter, studentsToTake);
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidStudentFilter);
+            }
+        }
+
+        private static void FilterAndTake(Dictionary<string, List<int>> wantedData, Predicate<double> givenFilter, int studentsToTake)
+        {
+            int counterForPrinting = 0;
+
+            foreach (var studentPoints in wantedData)
+            {
+                if (counterForPrinting != studentsToTake)
+                {
+                    break;
+                }
+
+                var averagePoint = Average(studentPoints.Value);
+
+                if (givenFilter(averagePoint))
+                {
+                    OutputWriter.PrintStudent(studentPoints);
+                    counterForPrinting++;
+                }
+            }
         }
 
         private static bool ExcellentFilter(double mark)
@@ -26,7 +63,17 @@ namespace BashSoft.Repositories
 
         private static double Average(List<int> scores)
         {
-            //TODO page.42/57
+            int totalScore = 0;
+
+            foreach (var curScore in scores)
+            {
+                totalScore += curScore;
+            }
+
+            var percentageOfAll = (totalScore / scores.Count) * 100;
+            var mark = percentageOfAll * 4 + 2;
+
+            return mark;
         }
     }
 }

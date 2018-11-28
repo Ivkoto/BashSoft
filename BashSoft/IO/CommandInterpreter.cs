@@ -106,7 +106,7 @@ namespace BashSoft.IO
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - cdAbs:absolute path"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "read students data base - readDb: path"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "display data entities - display students/courses ascending/descending"));
-                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "filter {courseName} excelent/average/poor  take 2/5/all students - filterExcelent (the output is written on the console)"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "filter {courseName} excelent/average/poor  take 2/5/all - filterExcelent (the output is written on the console)"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "order increasing students - order {courseName} ascending/descending take 20/10/all (the output is written on the console)"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "download file - download: path of file (saved in current directory)"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "download file asinchronously - downloadAsynch: path of file (save in the current directory)"));
@@ -222,6 +222,92 @@ namespace BashSoft.IO
             catch (Exception ex)
             {
                 OutputWriter.DisplayExeptions(ex.Message);
+            }
+        }
+
+        private static void TryFilterAndtake(string input, string[] data)
+        {
+            if (data.Length == 5)
+            {
+                string courseName = data[1];
+                string filter = data[2].ToLower();
+                string takeCommand = data[3].ToLower();
+                string takeQuantity = data[4].ToLower();
+
+                TryParseParametersForFilterAndtake(takeCommand, takeQuantity, courseName, filter);
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
+            }
+        }
+
+        private static void TryOrderAndTake(string input, string[] data)
+        {
+            if (data.Length == 5)
+            {
+                string courseName = data[1];
+                string order = data[2].ToLower();
+                string takeCommand = data[3].ToLower();
+                string takeQuantiy = data[4].ToLower();
+
+                TryParseParametersForOrderAndTake(takeCommand, takeQuantiy, courseName, order);
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidCommandMessage(input));
+            }
+        }
+
+        private static void TryParseParametersForOrderAndTake(string takeCommand, string takeQuantiy, string courseName, string order)
+        {
+            if (takeCommand == "take")
+            {
+                if (takeQuantiy == "all")
+                {
+                    StudentsRepository.OrderAndTake(courseName, order);
+                }
+                else
+                {
+                    int studetsToTake;
+                    bool isParsed = int.TryParse(takeQuantiy, out studetsToTake);
+                    if (isParsed)
+                    {
+                        StudentsRepository.OrderAndTake(courseName, order, studetsToTake);
+                    }
+                    else
+                    {
+                        OutputWriter.DisplayExeptions(ExceptionMessages.InvalidTakeQuantityParameter);
+                    }
+                }
+            }
+        }
+
+        private static void TryParseParametersForFilterAndtake(string takeCommand, string takeQuantity, string courseName, string filter)
+        {
+            if (takeCommand == "take")
+            {
+                if (takeQuantity == "all")
+                {
+                    StudentsRepository.FilterAndTake(courseName, filter);
+                }
+                else
+                {
+                    int studentsToTake;
+                    bool isParsed = int.TryParse(takeQuantity, out studentsToTake);
+                    if (isParsed)
+                    {
+                        StudentsRepository.FilterAndTake(courseName, filter, studentsToTake);
+                    }
+                    else
+                    {
+                        OutputWriter.DisplayExeptions(ExceptionMessages.InvalidTakeQuantityParameter);
+                    }
+                }
+            }
+            else
+            {
+                OutputWriter.DisplayExeptions(ExceptionMessages.InvalidTakeQuantityParameter);
             }
         }
     }

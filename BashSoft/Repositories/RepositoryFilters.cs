@@ -11,7 +11,7 @@ namespace BashSoft.Repositories
             {
                 FilterAndTake(wantedData, ExcellentFilter, studentsToTake);
             }
-            else if (wantedFilter == "everage")
+            else if (wantedFilter == "average")
             {
                 FilterAndTake(wantedData, AverageFilter, studentsToTake);
             }
@@ -31,7 +31,7 @@ namespace BashSoft.Repositories
 
             foreach (var studentPoints in wantedData)
             {
-                if (counterForPrinting != studentsToTake)
+                if (counterForPrinting == studentsToTake)
                 {
                     break;
                 }
@@ -63,16 +63,15 @@ namespace BashSoft.Repositories
 
         private static double Average(List<int> scores)
         {
-            int totalScore = 0;
+            double totalScore = 0;
 
             foreach (var curScore in scores)
             {
                 totalScore += curScore;
             }
 
-            var percentageOfAll = (totalScore / scores.Count) * 100;
+            var percentageOfAll = totalScore / (scores.Count * 100);
             var mark = percentageOfAll * 4 + 2;
-
             return mark;
         }
     }

@@ -25,7 +25,11 @@ namespace BashSoft.Repositories
         private static void OrderAndTake(Dictionary<string, List<int>> wantedData, int studentsToTake,
             Func<KeyValuePair<string, List<int>>, KeyValuePair<string, List<int>>, int> comparisonFunc)
         {
-
+            var result = GetSortedStudents(wantedData, studentsToTake, comparisonFunc);
+            foreach (var student in result)
+            {
+                OutputWriter.PrintStudent(student);
+            }
         }
 
         private static Dictionary<string, List<int>> GetSortedStudents (Dictionary<string, List<int>> wantedData, int studentsToTake,

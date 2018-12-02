@@ -9,7 +9,7 @@ namespace BashSoft.IO
         public static void InterpredCommand(string input)
         {
             string[] data = input.Split(' ');
-            string command = data[0];
+            string command = data[0].ToLower();
 
             switch (command)
             {
@@ -29,15 +29,15 @@ namespace BashSoft.IO
                     TryCompareFiles(input, data);
                     break;
 
-                case "cdRel":
+                case "cdrel":
                     TryChangePathRelatively(input, data);
                     break;
 
-                case "cdAbs":
+                case "cdabs":
                     TryChangePathAbsolute(input, data);
                     break;
 
-                case "readDb":
+                case "readdb":
                     TryReadDataBaseFromFile(input, data);
                     break;
 
@@ -50,14 +50,14 @@ namespace BashSoft.IO
                     break;
 
                 case "filter":
-                    //TODO
+                    TryFilterAndTake(input, data);
                     break;
 
                 case "order":
-                    //TODO
+                    TryOrderAndTake(input, data);
                     break;
 
-                case "decOrder":
+                case "decorder":
                     //TODO
                     break;
 
@@ -65,7 +65,7 @@ namespace BashSoft.IO
                     //TODO
                     break;
 
-                case "downloadAsync":
+                case "downloadasync":
                     //TODO
                     break;
 
@@ -102,10 +102,10 @@ namespace BashSoft.IO
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "make directory - mkdir: path "));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "traverse directory - ls: depth "));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "comparing files - cmp: path1 path2"));
-                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - cdRel:relative path"));
-                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - cdAbs:absolute path"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - cdRel: relative path or .."));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "change directory - cdAbs: absolute path"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "read students data base - readDb: path"));
-                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "display data entities - display students/courses ascending/descending"));
+                OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "display data entities - display: students/courses ascending/descending"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "filter {courseName} excelent/average/poor  take 2/5/all - filterExcelent (the output is written on the console)"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "order increasing students - order {courseName} ascending/descending take 20/10/all (the output is written on the console)"));
                 OutputWriter.WriteMessageOnNewLine(string.Format("|{0, -122}|", "download file - download: path of file (saved in current directory)"));
@@ -225,7 +225,7 @@ namespace BashSoft.IO
             }
         }
 
-        private static void TryFilterAndtake(string input, string[] data)
+        private static void TryFilterAndTake(string input, string[] data)
         {
             if (data.Length == 5)
             {

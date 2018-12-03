@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BashSoft.Repositories
 {
@@ -10,11 +10,15 @@ namespace BashSoft.Repositories
             comparision = comparision.ToLower();
             if (comparision == "ascending")
             {
-                OrderAndTake(wantedData, studentsToTake, CompareInOrder);
+                PrintStudents(wantedData.OrderBy(x => x.Value.Sum())
+                                                       .Take(studentsToTake)
+                                                       .ToDictionary(pair => pair.Key, pair => pair.Value));
             }
             else if (comparision == "descending")
             {
-                OrderAndTake(wantedData, studentsToTake, CompareDescendingOrder);
+                PrintStudents(wantedData.OrderByDescending(x => x.Value.Sum())
+                                                                       .Take(studentsToTake)
+                                                                       .ToDictionary(pair => pair.Key, pair => pair.Value));
             }
             else
             {
@@ -22,92 +26,12 @@ namespace BashSoft.Repositories
             }
         }
 
-        private static void OrderAndTake(Dictionary<string, List<int>> wantedData, int studentsToTake,
-            Func<KeyValuePair<string, List<int>>, KeyValuePair<string, List<int>>, int> comparisonFunc)
+        private static void PrintStudents(Dictionary<string, List<int>> studentsSorted)
         {
-            var result = GetSortedStudents(wantedData, studentsToTake, comparisonFunc);
-            foreach (var student in result)
+            foreach (var keyValuepair in studentsSorted)
             {
-                OutputWriter.PrintStudent(student);
+                OutputWriter.PrintStudent(keyValuepair);
             }
-        }
-
-        private static Dictionary<string, List<int>> GetSortedStudents (Dictionary<string, List<int>> wantedData, int studentsToTake,
-            Func<KeyValuePair<string, List<int>>, KeyValuePair<string, List<int>>, int> comparisonFunc)
-        {
-            int studentsTaken = 0;
-            var studentsSorted = new Dictionary<string, List<int>>();
-            var nextInOrder = new KeyValuePair<string, List<int>>();
-            bool isSorted = false;
-
-            while (studentsTaken < studentsToTake)
-            {
-                isSorted = true;
-
-                foreach (var studentScore in wantedData)
-                {
-                    if (!string.IsNullOrEmpty(nextInOrder.Key))
-                    {
-                        int comparisonResult = comparisonFunc(studentScore, nextInOrder);
-                        if (comparisonResult >= 0 && !studentsSorted.ContainsKey(studentScore.Key))
-                        {
-                            nextInOrder = studentScore;
-                            isSorted = false;
-                        }
-                    }
-                    else
-                    {
-                        if (!studentsSorted.ContainsKey(studentScore.Key))
-                        {
-                            nextInOrder = studentScore;
-                            isSorted = false;
-                        }
-                    }
-                }
-
-                if (!isSorted)
-                {
-                    studentsSorted.Add(nextInOrder.Key, nextInOrder.Value);
-                    studentsTaken++;
-                    nextInOrder = new KeyValuePair<string, List<int>>();
-                }                
-            }
-
-            return studentsSorted;
-        }
-
-        private static int CompareInOrder(KeyValuePair<string, List<int>> firstValue, KeyValuePair<string, List<int>> secondValue)
-        {
-            int totalScoresOfFirst = 0;
-            foreach (int mark in firstValue.Value)
-            {
-                totalScoresOfFirst += mark;
-            }
-
-            int totalScoreSecond = 0;
-            foreach (int mark in secondValue.Value)
-            {
-                totalScoreSecond += mark;
-            }
-
-            return totalScoreSecond.CompareTo(totalScoresOfFirst);
-        }
-
-        private static int CompareDescendingOrder(KeyValuePair<string, List<int>> firstValue, KeyValuePair<string, List<int>> secondValue)
-        {
-            int totalScoresOfFirst = 0;
-            foreach (int mark in firstValue.Value)
-            {
-                totalScoresOfFirst += mark;
-            }
-
-            int totalScoresOfSecond = 0;
-            foreach (int mark in secondValue.Value)
-            {
-                totalScoresOfSecond += mark;
-            }
-
-            return totalScoresOfFirst.CompareTo(totalScoresOfSecond);
         }
     }
 }

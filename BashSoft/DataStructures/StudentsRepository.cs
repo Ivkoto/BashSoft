@@ -69,6 +69,7 @@ namespace BashSoft
             else
             {
                 OutputWriter.DisplayExeptions(ExceptionMessages.InvalidPath);
+                return;
             }
 
             isDataInitialized = true;

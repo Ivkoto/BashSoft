@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BashSoft.Repositories
 {
@@ -9,15 +10,15 @@ namespace BashSoft.Repositories
         {
             if (wantedFilter == "excellent")
             {
-                FilterAndTake(wantedData, ExcellentFilter, studentsToTake);
+                FilterAndTake(wantedData, x => x >= 5, studentsToTake);
             }
             else if (wantedFilter == "average")
             {
-                FilterAndTake(wantedData, AverageFilter, studentsToTake);
+                FilterAndTake(wantedData, x => x >= 3.5 && x < 5, studentsToTake);
             }
             else if (wantedFilter == "poor")
             {
-                FilterAndTake(wantedData, PoorFilter, studentsToTake);
+                FilterAndTake(wantedData, x => x < 3.5, studentsToTake);
             }
             else
             {
@@ -36,43 +37,16 @@ namespace BashSoft.Repositories
                     break;
                 }
 
-                var averagePoint = Average(studentPoints.Value);
+                var averageScores = studentPoints.Value.Average();
+                var pecentageOfFullfilment = averageScores / 100;
+                var averageMark = pecentageOfFullfilment * 4 + 2;
 
-                if (givenFilter(averagePoint))
+                if (givenFilter(averageMark))
                 {
                     OutputWriter.PrintStudent(studentPoints);
                     counterForPrinting++;
                 }
             }
-        }
-
-        private static bool ExcellentFilter(double mark)
-        {
-            return mark >= 5.0;
-        }
-
-        private static bool AverageFilter(double mark)
-        {
-            return mark >= 3.5 && mark < 5.0;
-        }
-
-        private static bool PoorFilter(double mark)
-        {
-            return mark < 3.5;
-        }
-
-        private static double Average(List<int> scores)
-        {
-            double totalScore = 0;
-
-            foreach (var curScore in scores)
-            {
-                totalScore += curScore;
-            }
-
-            var percentageOfAll = totalScore / (scores.Count * 100);
-            var mark = percentageOfAll * 4 + 2;
-            return mark;
         }
     }
 }

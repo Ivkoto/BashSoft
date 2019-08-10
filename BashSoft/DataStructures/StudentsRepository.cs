@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace BashSoft
 {
-    //this class store data for our needs
+    //this class store data for our student database
     public static class StudentsRepository
     {
         public static bool isDataInitialized = false;
